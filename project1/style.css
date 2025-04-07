@@ -1,0 +1,11 @@
+#MAIN{
+    height: 900px;
+    width: 100%;
+    background-color: #B2DFDB ;
+}
+#block{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    background-color: black;
+}

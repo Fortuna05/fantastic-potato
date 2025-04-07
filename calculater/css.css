@@ -1,0 +1,49 @@
+#screen{
+    background-color: blanchedalmond;
+    height: 700px;
+    width: 500px;
+    margin: auto;
+}
+
+
+
+
+#numscreen{
+    height: 150px;
+    width: 450px;
+    margin: auto;
+    background-color: aliceblue;
+    padding: auto;
+}
+
+
+#numpad{
+
+    background-color: rgb(159, 174, 187);
+    height: 500px;
+    width: 450px;
+    margin: auto;
+    padding: auto;
+}
+.buttons{
+
+
+}
+.num{
+    height: 40px;
+    width: 40px;
+    background-color: blue;
+    margin: 3px;
+    display: inline-block;
+}
+
+.p_num{
+    padding: auto;
+    margin: auto;
+    text-align: center;
+}
+
+
+.num:hover{
+    background-color: rgb(58, 58, 199);
+}
