@@ -1,49 +1,73 @@
-#screen{
+#screen {
     background-color: blanchedalmond;
     height: 700px;
     width: 500px;
-    margin: auto;
+    margin: 20px auto;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
-
-
-
-#numscreen{
+#numscreen {
     height: 150px;
     width: 450px;
-    margin: auto;
+    margin: 0 auto 20px;
     background-color: aliceblue;
-    padding: auto;
+    padding: 10px;
+    text-align: right;
+    font-size: 48px;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
-
-#numpad{
-
+#numpad {
     background-color: rgb(159, 174, 187);
     height: 500px;
     width: 450px;
     margin: auto;
-    padding: auto;
-}
-.buttons{
-
-
-}
-.num{
-    height: 40px;
-    width: 40px;
-    background-color: blue;
-    margin: 3px;
-    display: inline-block;
+    padding: 15px;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
 }
 
-.p_num{
-    padding: auto;
-    margin: auto;
-    text-align: center;
+.num, .button {
+    height: 70px;
+    width: 100%;
+    background-color: #4a6baf;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
+.num:hover, .button:hover {
+    background-color: #3a5a9f;
+}
 
-.num:hover{
-    background-color: rgb(58, 58, 199);
+.operator {
+    background-color: #f39c12;
+}
+
+.operator:hover {
+    background-color: #e67e22;
+}
+
+#equals {
+    background-color: #27ae60;
+}
+
+#equals:hover {
+    background-color: #2ecc71;
+}
+
+#clear {
+    background-color: #e74c3c;
+}
+
+#clear:hover {
+    background-color: #c0392b;
 }

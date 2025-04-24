@@ -1,57 +1,111 @@
-let numscreen = document.getElementById('numscreen')
+let currentInput = '0';
+let previousInput = '';
+let operation = null;
+let shouldReset = false;
 
-const num_ps1 = document.getElementById('one')
-const num_ps2 = document.getElementById('two')
-const num_ps3 = document.getElementById('three')
-const num_ps4 = document.getElementById('four')
-const num_ps5 = document.getElementById('five')
-const num_ps6 = document.getElementById('six')
-const num_ps7 = document.getElementById('seven')
-const num_ps8 = document.getElementById('eight')
-const num_ps9 = document.getElementById('nine')
-const num_ps0 = document.getElementById('zero')
+const screen = document.getElementById('numscreen');
+const numberButtons = document.querySelectorAll('.num');
+const operatorButtons = document.querySelectorAll('.operator');
+const equalsButton = document.getElementById('equals');
+const clearButton = document.getElementById('clear');
+const decimalButton = document.getElementById('decimal');
 
-num_ps1.addEventListener('click', function () {
-    const textNode = document.createTextNode('1')
-    numscreen.appendChild(textNode)
-})
-num_ps2.addEventListener('click', function () {
-    const textNode = document.createTextNode('2')
-    numscreen.appendChild(textNode)
-})
-num_ps3.addEventListener('click', function () {
-    const textNode = document.createTextNode('3')
-    numscreen.appendChild(textNode)
-})
-num_ps4.addEventListener('click', function () {
-    const textNode = document.createTextNode('4')
-    numscreen.appendChild(textNode)
-})
-num_ps5.addEventListener('click', function () {
-    const textNode = document.createTextNode('5')
-    numscreen.appendChild(textNode)
-})
-num_ps6.addEventListener('click', function () {
-    const textNode = document.createTextNode('6')
-    numscreen.appendChild(textNode)
-})
-num_ps7.addEventListener('click', function () {
-    const textNode = document.createTextNode('7')
-    numscreen.appendChild(textNode)
-})
-num_ps8.addEventListener('click', function () {
-    const textNode = document.createTextNode('8')
-    numscreen.appendChild(textNode)
-})
-num_ps9.addEventListener('click', function () {
-    const textNode = document.createTextNode('9')
-    numscreen.appendChild(textNode)
-})
-num_ps0.addEventListener('click', function () {
-    const textNode = document.createTextNode('0')
-    numscreen.appendChild(textNode)
-})
+function updateScreen() {
+    screen.textContent = currentInput;
+}
 
+function clearAll() {
+    currentInput = '0';
+    previousInput = '';
+    operation = null;
+    shouldReset = false;
+    updateScreen();
+}
 
+function appendNumber(number) {
+    if (currentInput === '0' || shouldReset) {
+        currentInput = number;
+        shouldReset = false;
+    } else {
+        currentInput += number;
+    }
+    updateScreen();
+}
 
+function chooseOperation(op) {
+    if (operation !== null) calculate();
+    previousInput = currentInput;
+    operation = op;
+    shouldReset = true;
+}
 
+function calculate() {
+    let computation;
+    const prev = parseFloat(previousInput);
+    const current = parseFloat(currentInput);
+    
+    if (isNaN(prev) || isNaN(current)) return;
+    
+    switch (operation) {
+        case '+':
+            computation = prev + current;
+            break;
+        case '-':
+            computation = prev - current;
+            break;
+        case '*':
+            computation = prev * current;
+            break;
+        case '/':
+            computation = prev / current;
+            break;
+        default:
+            return;
+    }
+    
+    currentInput = computation.toString();
+    operation = null;
+    shouldReset = true;
+    updateScreen();
+}
+
+function addDecimal() {
+    if (shouldReset) {
+        currentInput = '0.';
+        shouldReset = false;
+        return;
+    }
+    
+    if (!currentInput.includes('.')) {
+        currentInput += '.';
+    }
+    updateScreen();
+}
+
+// Event listeners
+numberButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        appendNumber(button.textContent);
+    });
+});
+
+operatorButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        chooseOperation(button.textContent);
+    });
+});
+
+equalsButton.addEventListener('click', () => {
+    calculate();
+});
+
+clearButton.addEventListener('click', () => {
+    clearAll();
+});
+
+decimalButton.addEventListener('click', () => {
+    addDecimal();
+});
+
+// Initialize
+updateScreen();
